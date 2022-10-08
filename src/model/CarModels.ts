@@ -9,7 +9,7 @@ export interface Car {
 export interface MobileViewCardCountType {
   carousalCount: number | undefined;
   carousalPos: number;
-  moveCarousal: (flag: number, shiftPx: number) => void;
+  moveCarousal: (shiftPx: number) => void;
 }
 
 export interface SelectBodyType {

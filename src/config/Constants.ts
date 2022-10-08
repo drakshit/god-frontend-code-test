@@ -1,6 +1,6 @@
 const Constants = {
   carApiEndPoint: `/api/cars.json`,
-  imagePath: './',
+  imagePath: "./",
   breakPoints: {
     large: 1199,
     medium: 899,
@@ -8,6 +8,16 @@ const Constants = {
   },
   mobileCardWidth: 350,
   cardWidth: 400,
+  links: [
+    {
+      url: "/learn/",
+      label: "learn",
+    },
+    {
+      url: "/shop/",
+      label: "shop",
+    },
+  ],
 };
 
 export default Constants;

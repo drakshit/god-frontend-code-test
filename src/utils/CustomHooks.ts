@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AxiosInstance from "./config/AxiosConfig";
+import AxiosInstance from "../config/AxiosConfig";
 
 interface AxiosProps {
   endPoint: string;

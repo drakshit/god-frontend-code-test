@@ -1,0 +1,15 @@
+@function toRem($value) {
+    $remValue: calc($value / 16)+rem;
+    @return $remValue;
+}
+
+// break points
+$screen-size-small: 599px;
+$screen-size-medium: 899px;
+$screen-size-large: 1199px;
+
+// colors
+$outline-color: #535050;
+$error-text: rgb(213, 4, 4);
+$light-gray: #e1e1e1;
+$dark-gray: #8c8c8c;

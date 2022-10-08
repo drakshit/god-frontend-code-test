@@ -1,0 +1,142 @@
+@function toRem($value) {
+  $remValue: calc($value / 16)+rem;
+  @return $remValue;
+}
+
+// break points
+$screen-size-small: 599px;
+$screen-size-medium: 899px;
+$screen-size-large: 1199px;
+
+// colors
+$outline-color: #535050;
+
+.carousal {
+  &Root {
+    width: auto;
+    min-height: toRem(300);
+    margin-right: toRem(20);
+
+    .bodyTypeBlock {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .navButtons {
+      display: flex;
+      height: toRem(50);
+      justify-content: flex-end;
+
+      button {
+        cursor: pointer;
+        background: transparent;
+        border: none;
+
+        &:focus {
+          outline-width: toRem(1);
+          outline-color: $outline-color;
+          outline-offset: toRem(4);
+          border-radius: toRem(2);
+        }
+      }
+
+      .left {
+        display: block;
+        width: toRem(50);
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+
+        :hover {
+          transform: scale(0.98);
+        }
+      }
+
+      .right {
+        display: block;
+        width: toRem(50);
+        margin-left: toRem(20);
+        -moz-transform: scaleX(1);
+        -o-transform: scaleX(1);
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+
+        :hover {
+          transform: scale(0.98);
+        }
+      }
+    }
+  }
+
+  &Body {
+    display: flex !important;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    transition: scroll 0.5s ease-in-out;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    height: 100%;
+
+    .card {
+      min-width: toRem(400);
+      border: unset;
+      box-shadow: none;
+
+      .learn,
+      .shop {
+        &:focus {
+          outline-width: toRem(1);
+          outline-color: $outline-color;
+          outline-offset: toRem(4);
+          border-radius: toRem(2);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $screen-size-medium) {
+  body {
+    .carousalRoot {
+      .bodyTypeBlock {
+        flex-direction: column;
+
+        div {
+          margin-top: toRem(8);
+
+          div {
+            align-items: center;
+          }
+        }
+      }
+
+      .carousalBody {
+        .card {
+          min-width: toRem(350);
+        }
+      }
+
+      .mobileNav {
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+        border-radius: 50%;
+        border: toRem(1) solid #e1e1e1;
+        margin: 0.5rem;
+        cursor: pointer;
+
+        &:focus {
+          outline-color: $outline-color;
+        }
+      }
+    }
+  }
+}
