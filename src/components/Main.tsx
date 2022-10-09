@@ -8,7 +8,7 @@ import { CarousalType } from "./carousal/carousal.model";
 import Error from "./Error";
 import SelectBody from "./SelectBody";
 
-const Header = () => {
+const Main = () => {
   const headerRef = useRef<HTMLDataElement>(null);
   const [carousalItems, setCarousalItems] = useState<CarousalType[]>();
   const [selectedBodyType, setSelectedBodyType] = useState<string>();
@@ -28,7 +28,7 @@ const Header = () => {
     const carList: Car[] = response?.filter((carData: Car) =>
       selectedBodyType ? carData.bodyType === selectedBodyType : carData
     );
-    
+
     carList &&
       setCarousalItems(() => {
         const carousalItems: CarousalType[] = carList.map((car: Car) => {
@@ -42,7 +42,16 @@ const Header = () => {
             },
             thumbnail: car.imageUrl,
             footer: {
-              links: Constants.links,
+              links: [
+                {
+                  url: Constants.links[0].url + car.id,
+                  label: Constants.links[0].label,
+                },
+                {
+                  url: Constants.links[1].url + car.id,
+                  label: Constants.links[1].label,
+                },
+              ],
             },
           };
           return carousalType;
@@ -57,7 +66,13 @@ const Header = () => {
       {response && (
         <Block ref={headerRef}>
           <Flex>
-            <Block extend={{ height: '0.5rem', backgroundColor: "#1c6bba", marginBottom: '0.25rem' }} />
+            <Block
+              extend={{
+                height: "0.5rem",
+                backgroundColor: "#1c6bba",
+                marginBottom: "0.25rem",
+              }}
+            />
             <SelectBody
               carList={response as Car[]}
               selectBodyType={(bodyType: string) =>
@@ -73,4 +88,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Main;

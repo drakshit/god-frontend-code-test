@@ -1,5 +1,8 @@
+/*
+  This is app constance file, here all hard-coded fixed values are kept which has been used in the app frequently.
+*/
 const Constants = {
-  carApiEndPoint: `/api/cars.json`,
+  carApiEndPoint: "/api/cars.json",
   imagePath: "./",
   breakPoints: {
     large: 1199,
