@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Block, Flex, LoadingBar, Spacer } from "vcc-ui";
+import { Block, Flex, LoadingBar } from "vcc-ui";
 import Constants from "../config/Constants";
 import { Car } from "../model/CarModels";
 import { useAxios } from "../utils/CustomHooks";
+import { createCarousalItems } from "../utils/Utils.function";
 import Carousal from "./carousal/Carousal";
 import { CarousalType } from "./carousal/carousal.model";
 import Error from "./Error";
@@ -29,35 +30,7 @@ const Main = () => {
       selectedBodyType ? carData.bodyType === selectedBodyType : carData
     );
 
-    carList &&
-      setCarousalItems(() => {
-        const carousalItems: CarousalType[] = carList.map((car: Car) => {
-          const carousalType: CarousalType = {
-            header: {
-              text: car.bodyType,
-              subText: {
-                primaryText: car.modelName,
-                secondaryText: car.modelType,
-              },
-            },
-            thumbnail: car.imageUrl,
-            footer: {
-              links: [
-                {
-                  url: Constants.links[0].url + car.id,
-                  label: Constants.links[0].label,
-                },
-                {
-                  url: Constants.links[1].url + car.id,
-                  label: Constants.links[1].label,
-                },
-              ],
-            },
-          };
-          return carousalType;
-        });
-        return carousalItems;
-      });
+    carList && setCarousalItems(() => createCarousalItems(carList));
   }, [response, selectedBodyType]);
 
   return (
@@ -79,7 +52,10 @@ const Main = () => {
                 setSelectedBodyType(bodyType)
               }
             />
-            <Carousal items={carousalItems as CarousalType[]} />
+            <Carousal
+              id="car-carousal"
+              items={carousalItems as CarousalType[]}
+            />
           </Flex>
         </Block>
       )}

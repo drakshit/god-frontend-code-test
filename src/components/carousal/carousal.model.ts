@@ -1,5 +1,6 @@
 
 export type CarousalType = {
+  id?: string;
   header: {
     text: string;
     subText: {

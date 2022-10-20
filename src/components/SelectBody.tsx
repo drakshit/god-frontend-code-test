@@ -36,7 +36,7 @@ const SelectBody: React.FC<SelectBodyType> = (carList: SelectBodyType) => {
   };
 
   return (
-    <Block className="bodyTypeContainer">
+    <Block className="bodyTypeContainer" data-type="body-filter">
       <SelectInput
         tabIndex={0}
         className="bodyType"
@@ -49,7 +49,7 @@ const SelectBody: React.FC<SelectBodyType> = (carList: SelectBodyType) => {
         {bodyTypes &&
           bodyTypes.map((bodyType: string, index: number) => {
             return (
-              <option key={`${bodyType}-${index}`} value={bodyType}>
+              <option key={`${bodyType}-${index}`} value={bodyType} data-type="body-filter-item">
                 {bodyType}
               </option>
             );

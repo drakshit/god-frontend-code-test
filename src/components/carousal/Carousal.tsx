@@ -19,6 +19,7 @@ const thumbStyle = (imageUrl: string) => {
 };
 
 interface ItemsProps {
+  id?: string;
   items: CarousalType[];
 }
 
@@ -36,7 +37,9 @@ const Carousal: React.FC<ItemsProps> = (itemsProps: ItemsProps) => {
 
   useEffect(() => {
     setCarousalPos(0);
-    carousalBodyRef?.current?.scroll({ left: 0, behavior: "smooth" });
+    try{
+      carousalBodyRef?.current?.scroll({ left: 0, behavior: "smooth" });
+    }catch(error: any){}
   }, [itemsProps]);
   /*
       Register the event only for not large screen and deregister on unload
@@ -87,7 +90,9 @@ const Carousal: React.FC<ItemsProps> = (itemsProps: ItemsProps) => {
         : carousalBodyRef?.current.scrollLeft - shiftPx,
       behavior: "smooth",
     };
-    carousalBodyRef?.current.scroll(scrollObj);
+    try{
+      carousalBodyRef?.current.scroll(scrollObj);
+    }catch(error: any){}
   };
 
   /*
@@ -118,11 +123,18 @@ const Carousal: React.FC<ItemsProps> = (itemsProps: ItemsProps) => {
 
   return (
     <>
-      <Block className={styles.carousalRoot}>
+      <Block
+        className={styles.carousalRoot}
+        {...(itemsProps.id ? { id: itemsProps.id } : {})}
+      >
         <Block className={styles.carousalBody} ref={carousalBodyRef}>
           {itemsProps.items?.map((item: CarousalType, index: number) => {
             return (
-              <Card key={`Car-${index}`} className={styles.card}>
+              <Card
+                key={`Car-${index}`}
+                className={styles.card}
+                data-type="carousal"
+              >
                 <CardContent>
                   <Block>
                     <Text
@@ -142,7 +154,10 @@ const Carousal: React.FC<ItemsProps> = (itemsProps: ItemsProps) => {
                       )}
                     </Text>
                   </Block>
-                  <Flex extend={thumbStyle(item.thumbnail)} />
+                  <Flex
+                    title={item.header.subText.primaryText}
+                    extend={thumbStyle(item.thumbnail)}
+                  />
                   <Block
                     extend={{
                       display: "flex",
@@ -159,6 +174,7 @@ const Carousal: React.FC<ItemsProps> = (itemsProps: ItemsProps) => {
                           className={styles.learn}
                           href={link.url}
                           arrow="right"
+                          onClick={(e: any) => e.preventDefault()} // We do not have any routing, hence blocking the action
                         >
                           {link.label}
                         </Link>
